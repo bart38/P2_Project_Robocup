@@ -251,7 +251,7 @@
       </inertial>
     </link>
  
-<!--        
+        
      <joint name="${prefix}ur3_mount_joint" type="revolute">
       <parent link="${prefix}ur3_mount" />
       <child link = "${prefix}bottom_link" />
@@ -289,9 +289,9 @@
       <xacro:cylinder_inertial radius="0.075" length="0.178" mass="${bottom_mass}">
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
       </xacro:cylinder_inertial>
-    </link> -->
+    </link> 
       
-    <!-- <joint name="${prefix}shoulder_pan_joint" type="revolute">
+    <joint name="${prefix}shoulder_pan_joint" type="revolute">
       <parent link="${prefix}bottom_link" />
       <child link = "${prefix}shoulder_link" />
       <origin xyz="0.0 0.0 ${shoulder_height}" rpy="0.0 0.0 0.0" />
@@ -538,7 +538,7 @@
         </geometry>
         <origin rpy="0 0 0" xyz="-0.01 0 0"/>
       </collision>
-    </link>  -->
+    </link>  
 
     <xacro:ur_arm_transmission prefix="${prefix}" hw_interface="${transmission_hw_interface}" />
     <xacro:ur_arm_gazebo prefix="${prefix}" />
