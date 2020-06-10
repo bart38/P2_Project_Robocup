@@ -8,7 +8,7 @@
     </plugin>
 
 
-    <plugin name="gazebo_ros_power_monitor_controller" filename="libgazebo_ros_power_monitor.so">
+    <!-- <plugin name="gazebo_ros_power_monitor_controller" filename="libgazebo_ros_power_monitor.so">
       <alwaysOn>true</alwaysOn>
       <updateRate>1.0</updateRate>
       <timeout>5</timeout>
@@ -19,7 +19,7 @@
       <chargeRate>525</chargeRate>
       <dischargeVoltage>15.52</dischargeVoltage>
       <chargeVoltage>16.41</chargeVoltage>
-    </plugin>
+    </plugin> -->
  
   </gazebo>
 

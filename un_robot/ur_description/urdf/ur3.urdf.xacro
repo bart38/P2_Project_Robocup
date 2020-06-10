@@ -76,7 +76,7 @@
     <xacro:property name="wrist_2_length" value="${d5}" />
     <xacro:property name="wrist_3_length" value="${d6}" />
 
-    <gazebo>
+    <!-- <gazebo>
 	    <plugin name="omni_steering" filename="libgazebo_ros_planar_move.so">
 	      <commandTopic>/cmd_vel</commandTopic>
 	      <odometryTopic>/odom</odometryTopic>
@@ -85,8 +85,8 @@
 	      <robotBaseFrame>base_link</robotBaseFrame>
 	      <publishTF>false</publishTF>
 	    </plugin>
-	  </gazebo>
-   
+	  </gazebo> -->
+
     <link name="${prefix}base_link" >
       <visual>
         <geometry>
@@ -105,7 +105,7 @@
       <inertial>
         <mass value= "${frame_mass}"/>
         <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/> 
-        <origin xyz="0.15 -0.000252178578867549 0.0919059339213158"  rpy="0 0 0" />
+        <origin xyz="0 0 0"  rpy="0 0 0" />
       </inertial>
     </link>
     <!--     -->
