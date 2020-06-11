@@ -1,0 +1,1 @@
+controller_joint_names: ['servo', 'rightTilted', 'rightStraight', 'fingerRightLeft_link', 'leftStraight', 'leftTilted', 'fingerLeftLeft', ]

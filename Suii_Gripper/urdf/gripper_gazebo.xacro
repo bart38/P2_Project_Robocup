@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+
+    <xacro:macro name="suii_gazebo" params="prefix">
+
+    <gazebo reference="${prefix}base_link">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}servo_link">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}rightTilted_link">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}rightStraight_ink">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}fingerRightLeft_link">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}leftStraight_link">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}leftTilted_link">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}fingerLeftLeft_link">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+
+  </xacro:macro>
+
+</robot>

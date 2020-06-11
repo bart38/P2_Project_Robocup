@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <xacro:macro name="suii_gazebo" params="prefix">
+
+    <gazebo reference="${prefix}base_link">
+      <selfCollide>true</selfCollide>
+      <kinematic>true</kinematic>
+    </gazebo>
+    <gazebo reference="${prefix}ur3_mount_link">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}left_front_wheel">
+      <selfCollide>true</selfCollide>
+      <collision>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0</mu>
+              <mu2>0</mu2>
+              <slip1>0</slip1>
+              <slip2>0</slip2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+    </gazebo>    
+    <gazebo reference="${prefix}left_back_wheel">
+      <selfCollide>true</selfCollide>
+      <collision>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0</mu>
+              <mu2>0</mu2>
+              <slip1>0</slip1>
+              <slip2>0</slip2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+    </gazebo>    
+    <gazebo reference="${prefix}right_front_wheel">
+      <selfCollide>true</selfCollide>
+      <collision>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0</mu>
+              <mu2>0</mu2>
+              <slip1>0</slip1>
+              <slip2>0</slip2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+    </gazebo>    
+    <gazebo reference="${prefix}right_back_wheel">
+      <selfCollide>true</selfCollide>
+      <collision>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0</mu>
+              <mu2>0</mu2>
+              <slip1>0</slip1>
+              <slip2>0</slip2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+    </gazebo>
+    <gazebo reference="${prefix}bottum_link">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}shoulder_link">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}upper_arm_link">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}forearm_link">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}wrist_1_link">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}wrist_3_link">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}wrist_2_link">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}ee_link">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    
+
+  </xacro:macro>
+
+</robot>
