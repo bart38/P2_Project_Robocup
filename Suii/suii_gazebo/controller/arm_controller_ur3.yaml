@@ -8,7 +8,6 @@ arm_controller:
     - wrist_2_joint
     - wrist_3_joint
     - ur3_mount_joint
-    - gripper_mount
 
   constraints:
       goal_time: 0.6
@@ -20,7 +19,6 @@ arm_controller:
       wrist_2_joint: {trajectory: 0.1, goal: 0.1}
       wrist_3_joint: {trajectory: 0.1, goal: 0.1}
       UR3_mount_joint: {trajectory: 0.1, goal: 0.1}
-      gripper_mount: {trajectory: 0.1, goal: 0.1}
 
   stop_trajectory_duration: 0.5
   state_publish_rate:  25
@@ -35,4 +33,3 @@ joint_group_position_controller:
     - wrist_2_joint
     - wrist_3_joint
     - ur3_mount_joint
-    - gripper_mount

@@ -94,7 +94,6 @@
     <gazebo reference="${prefix}ee_link">
       <selfCollide>true</selfCollide>
     </gazebo>
-    
 
   </xacro:macro>
 
