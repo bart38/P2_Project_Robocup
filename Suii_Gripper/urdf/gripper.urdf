@@ -2,7 +2,7 @@
 
   
   name="gripper">
-  <link
+  <!-- <link
     name="base_link">
     <inertial>
       <origin
@@ -42,7 +42,7 @@
           filename="package://suii_gripper/meshes/base_link.STL" />
       </geometry>
     </collision>
-  </link>
+  </link> -->
   <link
     name="servo_link">
     <inertial>

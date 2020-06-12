@@ -553,12 +553,53 @@
           <mesh filename="package://suii_description/meshes/suii/collision/base_gripper.stl"/>
         </geometry>
       </collision>
-      <xacro:cylinder_inertial radius="0.032" length="0.04" mass="${wrist_3_mass}">
-        <origin xyz="0.0 ${wrist_3_length - 0.02} 0.0" rpy="${pi/2} 0 0" />
-      </xacro:cylinder_inertial>
+      <inertial>
+        <mass value= "${frame_mass}"/>
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/> 
+        <origin xyz="0 0 0"  rpy="0 0 0" />
+      </inertial>
     </link>
+<!--  -->
+    <joint name="${prefix}servo_link" type="fixed">
+      <parent link="${prefix}base_gripper" />
+      <child link = "${prefix}servo_link" />
+      <origin xyz="0.0 0.1 0.0" rpy="1.57 1.57 0" />
+      <axis xyz="0 1 0" />
+      <!-- <xacro:unless value="${joint_limited}">
+        <limit lower="${-2.0 * pi}" upper="${2.0 * pi}" effort="54.0" velocity="3.2"/>
+        <xacro:if value="${safety_limits}">
+          <safety_controller soft_lower_limit="${-2.0 * pi + safety_pos_margin}" soft_upper_limit="${2.0 * pi - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
+        </xacro:if>
+      </xacro:unless>
+      <xacro:if value="${joint_limited}">
+        <limit lower="${wrist_3_lower_limit}" upper="${wrist_3_upper_limit}" effort="54.0" velocity="3.2"/>
+        <xacro:if value="${safety_limits}">
+          <safety_controller soft_lower_limit="${wrist_3_lower_limit + safety_pos_margin}" soft_upper_limit="${wrist_3_upper_limit - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
+        </xacro:if>
+      </xacro:if>
+      <dynamics damping="0.0" friction="0.0"/> -->
+    </joint>
 
-
+    <link name="${prefix}servo_link">
+      <visual>
+        <geometry>
+          <mesh filename="package://suii_description/meshes/suii/visual/servo_link.stl"/>
+        </geometry>
+        <material name="LightGrey">
+          <color rgba="0.7 0.7 0.7 1.0"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://suii_description/meshes/suii/collision/servo_link.stl"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value= "${frame_mass}"/>
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/> 
+        <origin xyz="0 0 0"  rpy="0 0 0" />
+      </inertial>
+    </link>
 
 
 
