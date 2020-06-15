@@ -1,0 +1,4 @@
+#!/bin/sh
+exec 2>&1
+cd "/home/alfredo/Downloads/ursim-3.6.0.30512/GUI/felix-cache/bundle97/data/com/ur/urcap/ethernetip/impl/daemon/"
+exec "/home/alfredo/Downloads/ursim-3.6.0.30512/GUI/felix-cache/bundle97/data/com/ur/urcap/ethernetip/impl/daemon/EIP"
