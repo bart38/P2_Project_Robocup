@@ -68,6 +68,12 @@
     <xacro:property name="wrist_2_length" value="${d5}" />
     <xacro:property name="wrist_3_length" value="${d6}" />
 
+    <!-- sensor properties-->
+    <xacro:property name="sonar_link" value="-0.05" /> <!-- Size of square 'sonar' box -->
+    <xacro:property name="laser_link" value="-0.05" /> <!-- Size of square 'sonar' box -->
+    <xacro:property name="height" value="0.3" /> <!-- height sensors-->
+    <xacro:property name="axel_offset" value="0.05" /> <!-- offset placement -->
+
     <gazebo>
 	    <plugin name="omni_steering" filename="libgazebo_ros_planar_move.so">
 	      <commandTopic>/cmd_vel</commandTopic>
@@ -525,7 +531,71 @@
         </geometry>
         <origin rpy="0 0 0" xyz="-0.01 0 0"/>
       </collision>
-    </link> 
+    </link>
+
+    <!-- sonar -->
+    <link name="sonar_link">
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="${sonar_link} ${sonar_link} ${sonar_link}"/>
+        </geometry>
+      </collision>
+
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="${sonar_link} ${sonar_link} ${sonar_link}"/>
+        </geometry>
+        <material name="blue"/>
+      </visual>
+
+      <inertial>
+        <mass value="1e-5" />
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+      </inertial>
+    </link>
+
+    <!-- sonar joint -->
+    <joint name="sonar_joint" type="fixed">
+      <axis xyz= "0 1 0" />
+      <origin xyz="-0.275 0 0.1" rpy="0 0 3.1415926535897931"/>
+      <parent link="${prefix}base_link"/>
+      <child link="sonar_link"/>
+    </joint>
+
+    <!-- Hokuyo Laser -->
+    <link name="hokuyo_link">
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.1 0.1 0.1"/>
+        </geometry>
+      </collision>
+
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="${laser_link} ${laser_link} ${laser_link}"/>
+        </geometry>
+        <material name="red"/>
+      </visual>
+
+      <inertial>
+        <mass value="1e-5" />
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+      </inertial>
+    </link>
+
+    <!-- laser joint -->
+    <joint name="hokuyo_joint" type="fixed">
+      <axis xyz="0 1 0" />
+      <origin xyz="0.035 0 0.25" rpy="0 0 0"/>
+      <parent link="${prefix}base_link"/>
+      <child link="hokuyo_link"/>
+    </joint> 
 
     <xacro:suii_transmission prefix="${prefix}" hw_interface="${transmission_hw_interface}" />
     <xacro:suii_gazebo prefix="${prefix}" />
