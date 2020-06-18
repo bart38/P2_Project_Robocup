@@ -539,17 +539,30 @@
       </xacro:cylinder_inertial>
     </link>
 
-    <joint name="${prefix}gripper_mount" type="fixed">
+    <joint name="${prefix}wrist_3_link" type="revolute">
       <parent link="${prefix}wrist_3_link" />
-      <child link = "${prefix}gripper_base" />
-      <origin xyz="0 0.085 0" rpy="0 -1.57 0" />
+      <child link = "${prefix}gripper_base" />1.4771E-10
+      <origin xyz="0 0.085 0" rpy="0 1.57 -1.57" />
       <axis xyz="0 1 0" />
+      <xacro:unless value="${joint_limited}">
+        <limit lower="${-2.0 * pi}" upper="${2.0 * pi}" effort="54.0" velocity="3.2"/>
+        <xacro:if value="${safety_limits}">
+          <safety_controller soft_lower_limit="${-2.0 * pi + safety_pos_margin}" soft_upper_limit="${2.0 * pi - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
+        </xacro:if>
+      </xacro:unless>
+      <xacro:if value="${joint_limited}">
+        <limit lower="${wrist_3_lower_limit}" upper="${wrist_3_upper_limit}" effort="54.0" velocity="3.2"/>
+        <xacro:if value="${safety_limits}">
+          <safety_controller soft_lower_limit="${wrist_3_lower_limit + safety_pos_margin}" soft_upper_limit="${wrist_3_upper_limit - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
+        </xacro:if>
+      </xacro:if>
+      <dynamics damping="0.0" friction="0.0"/>
     </joint>
 
     <link name="${prefix}gripper_base">
       <visual>
         <geometry>
-          <mesh filename="package://suii_description/meshes/suii/visual/gripper_base.stl"/>
+          <mesh filename="package://suii_description/meshes/suii/visual/gripper_base.STL"/>
         </geometry>
         <material name="LightGrey">
           <color rgba="0.7 0.7 0.7 1.0"/>
@@ -557,7 +570,7 @@
       </visual>
       <collision>
         <geometry>
-          <mesh filename="package://suii_description/meshes/suii/collision/gripper_base.stl"/>
+          <mesh filename="package://suii_description/meshes/suii/collision/gripper_base.STL"/>
         </geometry>
       </collision>
       <inertial>
@@ -567,10 +580,51 @@
       </inertial>
     </link>
 
-    <!-- <joint name="${prefix}rightTilted_link" type="revolute">
+    <joint name="${prefix}leftTilted_link" type="revolute">
+      <parent link="${prefix}gripper_base" />
+      <child link = "${prefix}leftTilted_link" />
+      <origin xyz="0.04625 0.0035 -0.041" rpy="${pi} ${pi} 0" />
+      <axis xyz="0 1 0" /> 
+      <xacro:unless value="${joint_limited}">
+        <limit lower="${-2.0 * pi}" upper="${2.0 * pi}" effort="54.0" velocity="3.2"/>
+        <xacro:if value="${safety_limits}">
+          <safety_controller soft_lower_limit="${-2.0 * pi + safety_pos_margin}" soft_upper_limit="${2.0 * pi - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
+        </xacro:if>
+      </xacro:unless>
+      <xacro:if value="${joint_limited}">
+        <limit lower="${wrist_3_lower_limit}" upper="${wrist_3_upper_limit}" effort="54.0" velocity="3.2"/>
+        <xacro:if value="${safety_limits}">
+          <safety_controller soft_lower_limit="${wrist_3_lower_limit + safety_pos_margin}" soft_upper_limit="${wrist_3_upper_limit - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
+        </xacro:if>
+      </xacro:if>
+      <dynamics damping="0.0" friction="0.0"/>  
+    </joint> 
+
+    <link name="${prefix}leftTilted_link">
+      <visual>
+        <geometry>
+          <mesh filename="package://suii_description/meshes/suii/visual/leftTilted_link.STL"/>
+        </geometry>
+        <material name="LightGrey">
+          <color rgba="0.7 0.7 0.7 1.0"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://suii_description/meshes/suii/collision/leftTilted_link.STL"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value= "${frame_mass}"/>
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/> 
+        <origin xyz="0 0 0"  rpy="0 0 0" />
+      </inertial>
+    </link>  
+
+    <joint name="${prefix}rightTilted_link" type="revolute">
       <parent link="${prefix}gripper_base" />
       <child link = "${prefix}rightTilted_link" />
-      <origin xyz="-0.04625 0.0035 -0.041" rpy="0 0 3.1416" />
+      <origin xyz="-0.04625 0.0035 -0.041" rpy="${pi} ${pi} 0" />
       <axis xyz="0 1 0" /> 
       <xacro:unless value="${joint_limited}">
         <limit lower="${-2.0 * pi}" upper="${2.0 * pi}" effort="54.0" velocity="3.2"/>
@@ -590,7 +644,7 @@
     <link name="${prefix}rightTilted_link">
       <visual>
         <geometry>
-          <mesh filename="package://suii_description/meshes/suii/visual/rightTilted_link.stl"/>
+          <mesh filename="package://suii_description/meshes/suii/visual/rightTilted_link.STL"/>
         </geometry>
         <material name="LightGrey">
           <color rgba="0.7 0.7 0.7 1.0"/>
@@ -598,7 +652,7 @@
       </visual>
       <collision>
         <geometry>
-          <mesh filename="package://suii_description/meshes/suii/collision/rightTilted_link.stl"/>
+          <mesh filename="package://suii_description/meshes/suii/collision/rightTilted_link.STL"/>
         </geometry>
       </collision>
       <inertial>
@@ -606,14 +660,14 @@
         <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/> 
         <origin xyz="0 0 0"  rpy="0 0 0" />
       </inertial>
-    </link> 
+    </link>
 
-    <joint name="${prefix}rightStraight_link" type="continuous">
+    <joint name="${prefix}rightStraight_link" type="revolute">
       <parent link="${prefix}gripper_base" />
       <child link = "${prefix}rightStraight_link" />
-      <origin xyz="-0.02125 0.0035 -0.061" rpy="0 0 3.1416" />
-      <axis xyz="0 1 0" />  -->
-      <!-- <xacro:unless value="${joint_limited}">
+      <origin xyz="-0.02125 0.0035 -0.061" rpy="${pi} ${pi} 0" />
+      <axis xyz="0 1 0" /> 
+      <xacro:unless value="${joint_limited}">
         <limit lower="${-2.0 * pi}" upper="${2.0 * pi}" effort="54.0" velocity="3.2"/>
         <xacro:if value="${safety_limits}">
           <safety_controller soft_lower_limit="${-2.0 * pi + safety_pos_margin}" soft_upper_limit="${2.0 * pi - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
@@ -625,13 +679,13 @@
           <safety_controller soft_lower_limit="${wrist_3_lower_limit + safety_pos_margin}" soft_upper_limit="${wrist_3_upper_limit - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
         </xacro:if>
       </xacro:if>
-      <dynamics damping="0.0" friction="0.0"/>  -->
-    <!-- </joint>
+      <dynamics damping="0.0" friction="0.0"/>  
+    </joint> 
 
     <link name="${prefix}rightStraight_link">
       <visual>
         <geometry>
-          <mesh filename="package://suii_description/meshes/suii/visual/rightStraight_link.stl"/>
+          <mesh filename="package://suii_description/meshes/suii/visual/rightStraight_link.STL"/>
         </geometry>
         <material name="LightGrey">
           <color rgba="0.7 0.7 0.7 1.0"/>
@@ -639,7 +693,7 @@
       </visual>
       <collision>
         <geometry>
-          <mesh filename="package://suii_description/meshes/suii/collision/rightStraight_link.stl"/>
+          <mesh filename="package://suii_description/meshes/suii/collision/rightStraight_link.STL"/>
         </geometry>
       </collision>
       <inertial>
@@ -647,20 +701,55 @@
         <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/> 
         <origin xyz="0 0 0"  rpy="0 0 0" />
       </inertial>
-    </link> -->
+    </link>  
 
+    <joint name="${prefix}lefStraight_link" type="revolute">
+      <parent link="${prefix}gripper_base" />
+      <child link = "${prefix}lefStraight_link" />
+      <origin xyz="0.02125 0.0035 -0.061" rpy="${pi} ${pi} 0" />
+      <axis xyz="0 1 0" /> 
+      <xacro:unless value="${joint_limited}">
+        <limit lower="${-2.0 * pi}" upper="${2.0 * pi}" effort="54.0" velocity="3.2"/>
+        <xacro:if value="${safety_limits}">
+          <safety_controller soft_lower_limit="${-2.0 * pi + safety_pos_margin}" soft_upper_limit="${2.0 * pi - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
+        </xacro:if>
+      </xacro:unless>
+      <xacro:if value="${joint_limited}">
+        <limit lower="${wrist_3_lower_limit}" upper="${wrist_3_upper_limit}" effort="54.0" velocity="3.2"/>
+        <xacro:if value="${safety_limits}">
+          <safety_controller soft_lower_limit="${wrist_3_lower_limit + safety_pos_margin}" soft_upper_limit="${wrist_3_upper_limit - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
+        </xacro:if>
+      </xacro:if>
+      <dynamics damping="0.0" friction="0.0"/>  
+    </joint> 
 
- <!-- <joint name="${prefix}fingerRightLeft_link" type="continuous">
-       <parent link="${prefix}rightStraight_link" />
-      <child link = "${prefix}fingerRightLeft_link" />
-      <origin xyz="0.0838 0 -0.0102" rpy="0 0.2617 0"/> 
-       <axis xyz="0 1 0" /> 
+    <link name="${prefix}lefStraight_link">
+      <visual>
+        <geometry>
+          <mesh filename="package://suii_description/meshes/suii/visual/leftStraight_link.STL"/>
+        </geometry>
+        <material name="LightGrey">
+          <color rgba="0.7 0.7 0.7 1.0"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://suii_description/meshes/suii/collision/leftStraight_link.STL"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value= "${frame_mass}"/>
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/> 
+        <origin xyz="0 0 0"  rpy="0 0 0" />
+      </inertial>
+    </link>     
+
+    <joint name="${prefix}left_finger" type="revolute">
       <parent link="${prefix}rightTilted_link" />
-      <child link = "${prefix}fingerRightLeft_link" />
-      <origin xyz="0.0579 0 -0.0302" /> 
-      <axis xyz="0 1 0" /> -->
-      
-      <!-- <xacro:unless value="${joint_limited}">
+      <child link = "${prefix}left_finger" />
+      <origin xyz="0.07333 0.01 -0.0116" rpy="${pi} ${pi} 0" />
+      <axis xyz="0 1 0" /> 
+      <xacro:unless value="${joint_limited}">
         <limit lower="${-2.0 * pi}" upper="${2.0 * pi}" effort="54.0" velocity="3.2"/>
         <xacro:if value="${safety_limits}">
           <safety_controller soft_lower_limit="${-2.0 * pi + safety_pos_margin}" soft_upper_limit="${2.0 * pi - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
@@ -672,33 +761,13 @@
           <safety_controller soft_lower_limit="${wrist_3_lower_limit + safety_pos_margin}" soft_upper_limit="${wrist_3_upper_limit - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
         </xacro:if>
       </xacro:if>
-      <dynamics damping="0.0" friction="0.0"/>  -->
-    <!-- </joint>  -->
+      <dynamics damping="0.0" friction="0.0"/>  
+    </joint> 
 
- <!-- <joint name="${prefix}fingerRightLeft_link_2" type="continuous"> -->
-      <!-- <parent link="${prefix}rightStraight_link" />
-      <child link = "${prefix}fingerRightLeft_link" />
-      <origin xyz="0.0625 0 -0.0188" />
-      <axis xyz="0 1 0" /> -->
-      <!-- <xacro:unless value="${joint_limited}">
-        <limit lower="${-2.0 * pi}" upper="${2.0 * pi}" effort="54.0" velocity="3.2"/>
-        <xacro:if value="${safety_limits}">
-          <safety_controller soft_lower_limit="${-2.0 * pi + safety_pos_margin}" soft_upper_limit="${2.0 * pi - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
-        </xacro:if>
-      </xacro:unless>
-      <xacro:if value="${joint_limited}">
-        <limit lower="${wrist_3_lower_limit}" upper="${wrist_3_upper_limit}" effort="54.0" velocity="3.2"/>
-        <xacro:if value="${safety_limits}">
-          <safety_controller soft_lower_limit="${wrist_3_lower_limit + safety_pos_margin}" soft_upper_limit="${wrist_3_upper_limit - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
-        </xacro:if>
-      </xacro:if>
-      <dynamics damping="0.0" friction="0.0"/>  -->
-    <!-- </joint>  -->
-    
-    <!-- <link name="${prefix}fingerRightLeft_link">
+    <link name="${prefix}left_finger">
       <visual>
         <geometry>
-          <mesh filename="package://suii_description/meshes/suii/visual/fingerRightLeft_link.stl"/>
+          <mesh filename="package://suii_description/meshes/suii/visual/finger.STL"/>
         </geometry>
         <material name="LightGrey">
           <color rgba="0.7 0.7 0.7 1.0"/>
@@ -706,7 +775,7 @@
       </visual>
       <collision>
         <geometry>
-          <mesh filename="package://suii_description/meshes/suii/collision/fingerRightLeft_link.stl"/>
+          <mesh filename="package://suii_description/meshes/suii/collision/finger.STL"/>
         </geometry>
       </collision>
       <inertial>
@@ -714,14 +783,13 @@
         <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/> 
         <origin xyz="0 0 0"  rpy="0 0 0" />
       </inertial>
-    </link> -->
+    </link>  
 
-
-  <!-- <joint name="${prefix}leftStraight_link" type="revolute">
-      <parent link="${prefix}base_gripper" />
-      <child link = "${prefix}leftStraight_link" />
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <axis xyz="0 1 0" />
+    <joint name="${prefix}right_finger" type="revolute">
+      <parent link="${prefix}leftTilted_link" />
+      <child link = "${prefix}right_finger" />
+      <origin xyz="-0.07333 -0.01 -0.0116" rpy="${pi} ${pi} ${pi}" />
+      <axis xyz="0 1 0" /> 
       <xacro:unless value="${joint_limited}">
         <limit lower="${-2.0 * pi}" upper="${2.0 * pi}" effort="54.0" velocity="3.2"/>
         <xacro:if value="${safety_limits}">
@@ -734,100 +802,13 @@
           <safety_controller soft_lower_limit="${wrist_3_lower_limit + safety_pos_margin}" soft_upper_limit="${wrist_3_upper_limit - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
         </xacro:if>
       </xacro:if>
-      <dynamics damping="0.0" friction="0.0"/> 
-    </joint>
+      <dynamics damping="0.0" friction="0.0"/>  
+    </joint> 
 
-    <link name="${prefix}leftStraight_link">
+    <link name="${prefix}right_finger">
       <visual>
         <geometry>
-          <mesh filename="package://suii_description/meshes/suii/visual/leftStraight_link.stl"/>
-    <joint name="${prefix}ee_fixed_joint" type="fixed">
-      <parent link="${prefix}wrist_3_link" />
-      <child link = "${prefix}ee_link" />
-      <origin xyz="0.0 ${wrist_3_length} 0.0" rpy="0.0 0.0 ${pi/2.0}" />
-    </joint>
-
-    <link name="${prefix}ee_link">
-      <collision>
-        <geometry>
-          <box size="0.01 0.01 0.01"/>
-        </geometry>
-        <origin rpy="0 0 0" xyz="-0.01 0 0"/>
-      </collision>
-    </link> -->
-
-    <!-- sonar -->
-
- <!-- <joint name="${prefix}leftTilted_link" type="revolute">
-      <parent link="${prefix}base_gripper" />
-      <child link = "${prefix}leftTilted_link" />
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <axis xyz="0 1 0" />
-      <xacro:unless value="${joint_limited}">
-        <limit lower="${-2.0 * pi}" upper="${2.0 * pi}" effort="54.0" velocity="3.2"/>
-        <xacro:if value="${safety_limits}">
-          <safety_controller soft_lower_limit="${-2.0 * pi + safety_pos_margin}" soft_upper_limit="${2.0 * pi - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
-        </xacro:if>
-      </xacro:unless>
-      <xacro:if value="${joint_limited}">
-        <limit lower="${wrist_3_lower_limit}" upper="${wrist_3_upper_limit}" effort="54.0" velocity="3.2"/>
-        <xacro:if value="${safety_limits}">
-          <safety_controller soft_lower_limit="${wrist_3_lower_limit + safety_pos_margin}" soft_upper_limit="${wrist_3_upper_limit - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
-        </xacro:if>
-      </xacro:if>
-      <dynamics damping="0.0" friction="0.0"/> 
-    </joint>
-
-    <link name="${prefix}leftTilted_link">
-          <box size="${sonar_link} ${sonar_link} ${sonar_link}"/>
-        </geometry>
-      </collision>
-
-      <visual>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-        <geometry>
-          <mesh filename="package://suii_description/meshes/suii/visual/leftTilted_link.stl"/>
-          <box size="${sonar_link} ${sonar_link} ${sonar_link}"/>
-        </geometry>
-        <material name="blue"/>
-      </visual>
-      <collision>
-        <geometry>
-          <mesh filename="package://suii_description/meshes/suii/collision/leftTilted_link.stl"/>
-        </geometry>
-      </collision>
-
-      <inertial>
-        <mass value="1e-5" />
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-        <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
-      </inertial>
-    </link>
-
- <joint name="${prefix}fingerLeftLeft_link" type="revolute">
-      <parent link="${prefix}base_gripper" />
-      <child link = "${prefix}fingerLeftLeft_link" />
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <axis xyz="0 1 0" />
-      <xacro:unless value="${joint_limited}">
-        <limit lower="${-2.0 * pi}" upper="${2.0 * pi}" effort="54.0" velocity="3.2"/>
-        <xacro:if value="${safety_limits}">
-          <safety_controller soft_lower_limit="${-2.0 * pi + safety_pos_margin}" soft_upper_limit="${2.0 * pi - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
-        </xacro:if>
-      </xacro:unless>
-      <xacro:if value="${joint_limited}">
-        <limit lower="${wrist_3_lower_limit}" upper="${wrist_3_upper_limit}" effort="54.0" velocity="3.2"/>
-        <xacro:if value="${safety_limits}">
-          <safety_controller soft_lower_limit="${wrist_3_lower_limit + safety_pos_margin}" soft_upper_limit="${wrist_3_upper_limit - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
-        </xacro:if>
-      </xacro:if>
-      <dynamics damping="0.0" friction="0.0"/> 
-    </joint>
-
-    <link name="${prefix}fingerLeftLeft_link">
-      <visual>
-        <geometry>
-          <mesh filename="package://suii_description/meshes/suii/visual/fingerLeftLeft_link.stl"/>
+          <mesh filename="package://suii_description/meshes/suii/visual/finger.STL"/>
         </geometry>
         <material name="LightGrey">
           <color rgba="0.7 0.7 0.7 1.0"/>
@@ -835,7 +816,7 @@
       </visual>
       <collision>
         <geometry>
-          <mesh filename="package://suii_description/meshes/suii/collision/fingerLeftLeft_link.stl"/>
+          <mesh filename="package://suii_description/meshes/suii/collision/finger.STL"/>
         </geometry>
       </collision>
       <inertial>
@@ -843,7 +824,11 @@
         <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/> 
         <origin xyz="0 0 0"  rpy="0 0 0" />
       </inertial>
-    </link>  -->
+    </link>    
+
+
+
+
 
     <link name="sonar_link">
       <collision>
