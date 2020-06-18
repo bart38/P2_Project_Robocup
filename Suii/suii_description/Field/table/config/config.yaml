@@ -5,7 +5,6 @@ simple_model:
     joint_state_controller:
         type: joint_state_controller/JointStateController
         publish_rate: 20
-
     base_to_second_joint_position_controller:
         #this controller recieves position and via PID it takes care of the effort
         # needed to move the joint. based on https://wiki.ros.org/ros_control
