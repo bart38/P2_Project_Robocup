@@ -542,7 +542,7 @@
     <joint name="${prefix}wrist_3_link" type="revolute">
       <parent link="${prefix}wrist_3_link" />
       <child link = "${prefix}gripper_base" />1.4771E-10
-      <origin xyz="0 0.085 0" rpy="0 1.57 -1.57" />
+      <origin xyz="0 0.08 0" rpy="0 1.57 -1.57" />
       <axis xyz="0 1 0" />
       <xacro:unless value="${joint_limited}">
         <limit lower="${-2.0 * pi}" upper="${2.0 * pi}" effort="54.0" velocity="3.2"/>
@@ -744,10 +744,10 @@
       </inertial>
     </link>     
 
-    <joint name="${prefix}left_finger" type="revolute">
+    <joint name="${prefix}right_finger" type="revolute">
       <parent link="${prefix}rightTilted_link" />
-      <child link = "${prefix}left_finger" />
-      <origin xyz="0.07333 0.01 -0.0116" rpy="${pi} ${pi} 0" />
+      <child link = "${prefix}right_finger" />
+      <origin xyz="0.07358 0.01 -0.01452" rpy="${pi} ${pi} 0" />
       <axis xyz="0 1 0" /> 
       <xacro:unless value="${joint_limited}">
         <limit lower="${-2.0 * pi}" upper="${2.0 * pi}" effort="54.0" velocity="3.2"/>
@@ -764,7 +764,7 @@
       <dynamics damping="0.0" friction="0.0"/>  
     </joint> 
 
-    <link name="${prefix}left_finger">
+    <link name="${prefix}right_finger">
       <visual>
         <geometry>
           <mesh filename="package://suii_description/meshes/suii/visual/finger.STL"/>
@@ -785,10 +785,10 @@
       </inertial>
     </link>  
 
-    <joint name="${prefix}right_finger" type="revolute">
+    <joint name="${prefix}left_finger" type="revolute">
       <parent link="${prefix}leftTilted_link" />
-      <child link = "${prefix}right_finger" />
-      <origin xyz="-0.07333 -0.01 -0.0116" rpy="${pi} ${pi} ${pi}" />
+      <child link = "${prefix}left_finger" />
+      <origin xyz="-0.07358 -0.01 -0.01452" rpy="${pi} ${pi} ${pi}" />
       <axis xyz="0 1 0" /> 
       <xacro:unless value="${joint_limited}">
         <limit lower="${-2.0 * pi}" upper="${2.0 * pi}" effort="54.0" velocity="3.2"/>
@@ -805,7 +805,7 @@
       <dynamics damping="0.0" friction="0.0"/>  
     </joint> 
 
-    <link name="${prefix}right_finger">
+    <link name="${prefix}left_finger">
       <visual>
         <geometry>
           <mesh filename="package://suii_description/meshes/suii/visual/finger.STL"/>
