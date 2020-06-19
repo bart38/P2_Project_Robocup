@@ -514,7 +514,7 @@
         </visual>
         <self_collide>0</self_collide>
         <enable_wind>0</enable_wind>
-        <kinematic>0</kinematic>
+        <kinematic>true</kinematic>
       </link>
       <pose frame=''>2.54322 2.4368 0 0 -0 0</pose>
     </model>
@@ -659,6 +659,7 @@
             <izz>5.9625</izz>
           </inertia>
         </inertial>
+        <kinematic>true</kinematic>
         <collision name='plateau_2_collision'>
           <pose frame=''>0 0 0 1.5708 -0 0</pose>
           <geometry>
@@ -692,7 +693,7 @@
         </visual>
         <self_collide>0</self_collide>
         <enable_wind>0</enable_wind>
-        <kinematic>0</kinematic>
+        <kinematic>true</kinematic>
       </link>
       <pose frame=''>0.35 0.5 0 0 -0 1.57</pose>
     </model>
@@ -711,6 +712,7 @@
             <izz>5.9625</izz>
           </inertia>
         </inertial>
+        <kinematic>true</kinematic>
         <collision name='plateau_2_collision'>
           <pose frame=''>0 0 0 1.5708 -0 0</pose>
           <geometry>
@@ -744,7 +746,7 @@
         </visual>
         <self_collide>0</self_collide>
         <enable_wind>0</enable_wind>
-        <kinematic>0</kinematic>
+        <kinematic>true</kinematic>
       </link>
       <pose frame=''>4.65 4.4 0 0 -0 1.57</pose>
     </model>
