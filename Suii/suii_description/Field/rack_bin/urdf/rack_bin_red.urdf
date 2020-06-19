@@ -26,14 +26,14 @@
         rpy="1.5707963267949 0 0" />
       <geometry>
         <mesh
-          filename="package://rack_bin/meshes/red_bin.dae" />
+          filename="package://suii_description/Field/rack_bin/meshes/red_bin.dae" />
       </geometry>
       <material
         name="">
         <color
           rgba="0 0 1 1" />
         <texture
-          filename="package://rack_bin/textures/" />
+          filename="package://suii_description/Field/rack_bin/textures/" />
       </material>
     </visual>
     <collision>
@@ -42,7 +42,7 @@
         rpy="1.5707963267949 0 0" />
       <geometry>
         <mesh
-          filename="package://rack_bin/meshes/red_bin.dae" />
+          filename="package://suii_description/Field/rack_bin/meshes/red_bin.dae" />
       </geometry>
     </collision>
   </link>
