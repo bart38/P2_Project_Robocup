@@ -5,7 +5,7 @@
 <robot
   name="Part2.SLDPRT">
   <link
-    name="Extrusion_40x40.SLDPRT">
+    name="alu_prof_large_black">
     <inertial>
       <origin
         xyz="-0.01842 -0.05 -0.018504"
@@ -13,12 +13,12 @@
       <mass
         value="0.186" />
       <inertia
-        ixx="0"
-        ixy="0"
-        ixz="0"
-        iyy="0"
-        iyz="0"
-        izz="0" />
+        ixx="7.5037E-05"
+        ixy="2.73105966834574E-21"
+        ixz="2.189E-08"
+        iyy="2.2806E-05"
+        iyz="2.75135428616951E-21"
+        izz="7.4983E-05" />
     </inertial>
     <visual>
       <origin
@@ -45,5 +45,13 @@
           filename="package://suii_description/Field/objects/meshes/alu_prof_large_black.dae" />
       </geometry>
     </collision>
+    <ode>
+      <mu>-dInfinity</mu>
+      <mu2>-dInfinity</mu2>
+      <fdir1>1 0 0</fdir1>
+      <slip1>0</slip1>
+      <slip2>0</slip2>
+    </ode>
+    <kinematic>true</kinematic>
   </link>
 </robot>
