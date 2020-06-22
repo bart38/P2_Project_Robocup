@@ -68,6 +68,12 @@
     <xacro:property name="wrist_2_length" value="${d5}" />
     <xacro:property name="wrist_3_length" value="${d6}" />
 
+    <!-- sensor properties-->
+    <xacro:property name="sonar_link" value="-0.05" /> <!-- Size of square 'sonar' box -->
+    <xacro:property name="laser_link" value="-0.05" /> <!-- Size of square 'sonar' box -->
+    <xacro:property name="height" value="0.3" /> <!-- height sensors-->
+    <xacro:property name="axel_offset" value="0.05" /> <!-- offset placement -->
+
     <gazebo>
 	    <plugin name="omni_steering" filename="libgazebo_ros_planar_move.so">
 	      <commandTopic>/cmd_vel</commandTopic>
@@ -533,20 +539,343 @@
       </xacro:cylinder_inertial>
     </link>
 
-    <joint name="${prefix}ee_fixed_joint" type="fixed">
+    <joint name="${prefix}wrist_3_link" type="revolute">
       <parent link="${prefix}wrist_3_link" />
-      <child link = "${prefix}ee_link" />
-      <origin xyz="0.0 ${wrist_3_length} 0.0" rpy="0.0 0.0 ${pi/2.0}" />
+      <child link = "${prefix}gripper_base" />1.4771E-10
+      <origin xyz="0 0.085 0" rpy="0 1.57 -1.57" />
+      <axis xyz="0 1 0" />
+      <xacro:unless value="${joint_limited}">
+        <limit lower="${-2.0 * pi}" upper="${2.0 * pi}" effort="54.0" velocity="3.2"/>
+        <xacro:if value="${safety_limits}">
+          <safety_controller soft_lower_limit="${-2.0 * pi + safety_pos_margin}" soft_upper_limit="${2.0 * pi - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
+        </xacro:if>
+      </xacro:unless>
+      <xacro:if value="${joint_limited}">
+        <limit lower="${wrist_3_lower_limit}" upper="${wrist_3_upper_limit}" effort="54.0" velocity="3.2"/>
+        <xacro:if value="${safety_limits}">
+          <safety_controller soft_lower_limit="${wrist_3_lower_limit + safety_pos_margin}" soft_upper_limit="${wrist_3_upper_limit - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
+        </xacro:if>
+      </xacro:if>
+      <dynamics damping="0.0" friction="0.0"/>
     </joint>
 
-    <link name="${prefix}ee_link">
+    <link name="${prefix}gripper_base">
+      <visual>
+        <geometry>
+          <mesh filename="package://suii_description/meshes/suii/visual/gripper_base.STL"/>
+        </geometry>
+        <material name="LightGrey">
+          <color rgba="0.7 0.7 0.7 1.0"/>
+        </material>
+      </visual>
       <collision>
         <geometry>
-          <box size="0.01 0.01 0.01"/>
+          <mesh filename="package://suii_description/meshes/suii/collision/gripper_base.STL"/>
         </geometry>
-        <origin rpy="0 0 0" xyz="-0.01 0 0"/>
       </collision>
-    </link> 
+      <inertial>
+        <mass value= "${frame_mass}"/>
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/> 
+        <origin xyz="0 0 0"  rpy="0 0 0" />
+      </inertial>
+    </link>
+    <link name="${prefix}leftTilted_link">
+      <visual>
+        <geometry>
+          <mesh filename="package://suii_description/meshes/suii/visual/leftTilted_link.STL"/>
+        </geometry>
+        <material name="LightGrey">
+          <color rgba="0.7 0.7 0.7 1.0"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://suii_description/meshes/suii/collision/leftTilted_link.STL"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value= "${frame_mass}"/>
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/> 
+        <origin xyz="0 0 0"  rpy="0 0 0" />
+      </inertial>
+    </link>  
+    <joint name="${prefix}leftTilted_link" type="revolute">
+      <parent link="${prefix}gripper_base" />
+      <child link = "${prefix}leftTilted_link" />
+      <origin xyz="0.04625 0.0035 -0.041" rpy="${pi} ${pi} 0" />
+      <axis xyz="0 1 0" /> 
+      <limit lower="${-1.6}" upper="${0}" effort="54.0" velocity="3.2"/>
+       
+      <dynamics damping="0.0" friction="0.0"/>  
+    </joint> 
+
+   
+     <link name="${prefix}rightTilted_link">
+      <visual>
+        <geometry>
+          <mesh filename="package://suii_description/meshes/suii/visual/rightTilted_link.STL"/>
+        </geometry>
+        <material name="LightGrey">
+          <color rgba="0.7 0.7 0.7 1.0"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://suii_description/meshes/suii/collision/rightTilted_link.STL"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value= "${frame_mass}"/>
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/> 
+        <origin xyz="0 0 0"  rpy="0 0 0" />
+      </inertial>
+    </link>
+
+    <joint name="${prefix}rightTilted_link" type="revolute">
+      <parent link="${prefix}gripper_base" />
+      <child link = "${prefix}rightTilted_link" />
+      <origin xyz="-0.04625 0.0035 -0.041" rpy="${pi} ${pi} 0" />
+      <axis xyz="0 1 0" /> 
+      <limit lower="${0}" upper="${1.6}" effort="54.0" velocity="3.2"/>
+      <dynamics damping="0.0" friction="0.0"/>  
+    </joint> 
+
+    <link name="${prefix}rightStraight_link">
+      <visual>
+        <geometry>
+          <mesh filename="package://suii_description/meshes/suii/visual/rightStraight_link.STL"/>
+        </geometry>
+        <material name="LightGrey">
+          <color rgba="0.7 0.7 0.7 1.0"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://suii_description/meshes/suii/collision/rightStraight_link.STL"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value= "${frame_mass}"/>
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/> 
+        <origin xyz="0 0 0"  rpy="0 0 0" />
+      </inertial>
+    </link>  
+    <joint name="${prefix}rightStraight_link" type="revolute">
+      <parent link="${prefix}gripper_base" />
+      <child link = "${prefix}rightStraight_link" />
+      <origin xyz="-0.02125 0.0035 -0.061" rpy="${pi} ${pi} 0" />
+      <axis xyz="0 1 0" /> 
+      <limit lower="${0}" upper="${1.6}" effort="54.0" velocity="3.2"/>
+      <dynamics damping="0.0" friction="0.0"/>  
+    </joint> 
+
+    <link name="${prefix}leftStraight_link">
+      <visual>
+        <geometry>
+          <mesh filename="package://suii_description/meshes/suii/visual/leftStraight_link.STL"/>
+        </geometry>
+        <material name="LightGrey">
+          <color rgba="0.7 0.7 0.7 1.0"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://suii_description/meshes/suii/collision/leftStraight_link.STL"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value= "${frame_mass}"/>
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/> 
+        <origin xyz="0 0 0"  rpy="0 0 0" />
+      </inertial>
+    </link>     
+
+    <joint name="${prefix}leftStraight_link" type="revolute">
+      <parent link="${prefix}gripper_base" />
+      <child link = "${prefix}leftStraight_link" />
+      <origin xyz="0.02125 0.0035 -0.061" rpy="${pi} ${pi} 0" />
+      <axis xyz="0 1 0" /> 
+      <limit lower="${-1.6}" upper="${0}" effort="54.0" velocity="3.2"/>
+      <dynamics damping="0.0" friction="0.0"/>  
+    </joint> 
+
+    
+    <link name="${prefix}right_finger">
+      <visual>
+        <geometry>
+          <mesh filename="package://suii_description/meshes/suii/visual/finger.STL"/>
+        </geometry>
+        <material name="LightGrey">
+          <color rgba="0.7 0.7 0.7 1.0"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://suii_description/meshes/suii/collision/finger.STL"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value= "${frame_mass}"/>
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/> 
+        <origin xyz="0 0 0"  rpy="0 0 0" />
+      </inertial>
+    </link>  
+    <joint name="${prefix}right_finger" type="revolute">
+      <parent link="${prefix}rightTilted_link" />
+      <child link = "${prefix}right_finger" />
+      <origin xyz="0.07358 0.01 -0.01452" rpy="${pi} ${pi} 0" /> 
+      <axis xyz="0 1 0" /> 
+      <limit lower="${0}" upper="${1.6}" effort="54.0" velocity="3.2"/>
+      <dynamics damping="0.0" friction="0.0"/>  
+    </joint> 
+
+    <link name="${prefix}left_finger">
+      <visual>
+        <geometry>
+          <mesh filename="package://suii_description/meshes/suii/visual/finger.STL"/>
+        </geometry>
+        <material name="LightGrey">
+          <color rgba="0.7 0.7 0.7 1.0"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://suii_description/meshes/suii/collision/finger.STL"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value= "${frame_mass}"/>
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/> 
+        <origin xyz="0 0 0"  rpy="0 0 0" />
+      </inertial>
+    </link>    
+
+    <joint name="${prefix}left_finger" type="revolute">
+      <parent link="${prefix}leftTilted_link" />
+      <child link = "${prefix}left_finger" />
+      <origin xyz="-0.07358 -0.01 -0.01452" rpy="${pi} ${pi} ${pi}" /> 
+      <axis xyz="0 1 0" /> 
+      <limit lower="${0}" upper="${1.6}" effort="54.0" velocity="3.2"/>
+      <dynamics damping="0.0" friction="0.0"/>  
+    </joint> 
+
+    
+
+    <gazebo>
+ 	 <plugin name="mimic" filename="libroboticsgroup_gazebo_mimic_joint_plugin.so">
+	    <joint>${prefix}leftTilted_link</joint>
+	    <mimicJoint>${prefix}leftStraight_link</mimicJoint> 
+            <multiplier>1</multiplier>
+	 </plugin>
+    </gazebo>
+    <gazebo>
+ 	 <plugin name="mimic2" filename="libroboticsgroup_gazebo_mimic_joint_plugin.so">
+	    <joint>${prefix}rightTilted_link</joint>
+	    <mimicJoint>${prefix}rightStraight_link</mimicJoint>
+            <multiplier>1</multiplier>
+	 </plugin>
+    </gazebo>
+    <gazebo>
+ 	 <plugin name="mimic3" filename="libroboticsgroup_gazebo_mimic_joint_plugin.so">
+	    <joint>${prefix}leftTilted_link</joint>
+	    <mimicJoint>${prefix}left_finger</mimicJoint>
+            <multiplier>-1</multiplier>
+	 </plugin>
+    </gazebo>
+    <gazebo>
+ 	 <plugin name="mimic4" filename="libroboticsgroup_gazebo_mimic_joint_plugin.so">
+	    <joint>${prefix}rightTilted_link</joint>
+	    <mimicJoint>${prefix}right_finger</mimicJoint>
+            <multiplier>1</multiplier>
+	 </plugin>
+    </gazebo>
+
+
+    <link name="sonar_link">
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://suii_description/meshes/suii/collision/leftStraight_link.stl"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value= "${frame_mass}"/>
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/> 
+        <origin xyz="0 0 0"  rpy="0 0 0" />
+      </inertial>
+    </link>
+
+    <!-- sonar joint -->
+    <joint name="sonar_joint" type="fixed">
+      <axis xyz= "0 1 0" />
+      <origin xyz="-0.275 0 0.1" rpy="0 0 3.1415926535897931"/>
+      <parent link="${prefix}base_link"/>
+      <child link="sonar_link"/>
+    </joint>
+
+    <!-- Hokuyo Laser -->
+    <link name="hokuyo_link_back">
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.1 0.1 0.1"/>
+        </geometry>
+      </collision>
+
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="${laser_link} ${laser_link} ${laser_link}"/>
+        </geometry>
+        <material name="red"/>
+      </visual>
+
+      <inertial>
+        <mass value="1e-5" />
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+      </inertial>
+    </link>
+
+    <!-- laser joint -->
+    <joint name="hokuyo_joint_back" type="fixed">
+      <axis xyz="0 1 0" />
+      <origin xyz="0.244 0.168 0.15" rpy="0 0 ${pi/4}"/>
+      <parent link="${prefix}base_link"/>
+      <child link="hokuyo_link_back"/>
+    </joint>
+
+    <!-- Hokuyo Laser -->
+    <link name="hokuyo_link_front">
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.1 0.1 0.1"/>
+        </geometry>
+      </collision>
+
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="${laser_link} ${laser_link} ${laser_link}"/>
+        </geometry>
+        <material name="red"/>
+      </visual>
+
+      <inertial>
+        <mass value="1e-5" />
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+      </inertial>
+    </link>
+
+    <!-- laser joint -->
+    <joint name="hokuyo_joint_front" type="fixed">
+      <axis xyz="0 1 0" />
+      <origin xyz="-0.251153588295 -0.17189989984 0.16" rpy="0 0 ${pi/4 + pi}"/>
+      <parent link="${prefix}base_link"/>
+      <child link="hokuyo_link_front"/>
+    </joint> 
 
     <xacro:suii_transmission prefix="${prefix}" hw_interface="${transmission_hw_interface}" />
     <xacro:suii_gazebo prefix="${prefix}" />
