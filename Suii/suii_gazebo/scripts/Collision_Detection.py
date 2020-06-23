@@ -6,7 +6,28 @@ long_distance = 0.56
 short_distance = 0.42
 
 
-def Sensor_callback(msg):
+def Sensor_Front_callback(msg):
+    collision_detected = False
+    for i in range(len(msg.ranges)):
+        if (msg.ranges[i] < collision_distance) and (msg.ranges[i] > 0):
+            collision_detected = True
+            print("Collision Detected! 1")
+    for i in range(40, 50):
+        if (msg.ranges[i] < short_distance) and (msg.ranges[i] > 0):
+            collision_detected = True
+            print("Collision Detected! 2")
+    for i in range(15):
+        if (msg.ranges[1060 + i] < long_distance) and (msg.ranges[1060 + i] > 0):
+            collision_detected = True
+            print("Collision Detected! 3")
+
+    # if collision_detected:
+    #     print("Collision Detected!")
+    # for i in range(40, 60):
+    #     print(i, msg.ranges[i])
+
+
+def Sensor_Back_callback(msg):
     collision_detected = False
     for i in range(len(msg.ranges)):
         if (msg.ranges[i] < collision_distance) and (msg.ranges[i] > 0):
@@ -21,16 +42,11 @@ def Sensor_callback(msg):
             collision_detected = True
             print("Collision Detected! 3")
 
-    # if collision_detected:
-    #     print("Collision Detected!")
-    # for i in range(1060, 1079):
-    #     print(i, msg.ranges[i])
-
 
 def main():
     rospy.init_node('Collision_Detector')
-    rospy.Subscriber("/suii/laser/scan_front", LaserScan, Sensor_callback)
-    rospy.Subscriber("/suii/laser/scan_back", LaserScan, Sensor_callback)
+    rospy.Subscriber("/suii/laser/scan_front", LaserScan, Sensor_Front_callback)
+    rospy.Subscriber("/suii/laser/scan_back", LaserScan, Sensor_Back_callback)
 
 
 try:

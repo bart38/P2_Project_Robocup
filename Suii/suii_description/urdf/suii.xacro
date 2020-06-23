@@ -854,7 +854,7 @@
     <!-- laser joint -->
     <joint name="hokuyo_joint_back" type="fixed">
       <axis xyz="0 1 0" />
-      <origin xyz="0.244 0.168 0.15" rpy="0 0 ${pi/4}"/>
+      <origin xyz="0.240 0.171 0.18" rpy="0 0 ${pi/4}"/>
       <parent link="${prefix}base_link"/>
       <child link="hokuyo_link_back"/>
     </joint>
@@ -886,7 +886,7 @@
     <!-- laser joint -->
     <joint name="hokuyo_joint_front" type="fixed">
       <axis xyz="0 1 0" />
-      <origin xyz="-0.251153588295 -0.17189989984 0.16" rpy="0 0 ${pi/4 + pi}"/>
+      <origin xyz="-0.240 -0.171 0.18" rpy="0 0 ${pi/4 + pi}"/>
       <parent link="${prefix}base_link"/>
       <child link="hokuyo_link_front"/>
     </joint>
@@ -894,7 +894,7 @@
     <!-- Camera -->
     <joint name="${prefix}camera_joint" type="fixed">
       <axis xyz="0 1 0" />
-      <origin xyz="0.0 0.1 0.045" rpy="0 0 ${pi/2}"/>
+      <origin xyz="0.0 -0.045 -0.1" rpy="0 ${pi/2} ${-pi/2}"/>
       <parent link="${prefix}gripper_base"/>
       <child link="${prefix}camera_link"/>
     </joint>
