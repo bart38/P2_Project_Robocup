@@ -72,6 +72,71 @@
         <mechanicalReduction>1</mechanicalReduction>
       </actuator>
     </transmission>
+    <transmission name="${prefix}wrist_3_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${prefix}wrist_3_joint">
+        <hardwareInterface>${hw_interface}</hardwareInterface>
+      </joint>
+      <actuator name="${prefix}wrist_3_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="${prefix}leftTilted_link_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${prefix}leftTilted_link">
+        <hardwareInterface>${hw_interface}</hardwareInterface>
+      </joint>
+      <actuator name="${prefix}leftTilted_link_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+    <transmission name="${prefix}rightTilted_link_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${prefix}rightTilted_link">
+        <hardwareInterface>${hw_interface}</hardwareInterface>
+      </joint>
+      <actuator name="${prefix}rightTilted_link_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+    <transmission name="${prefix}leftStraight_link_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${prefix}leftStraight_link">
+        <hardwareInterface>${hw_interface}</hardwareInterface>
+      </joint>
+      <actuator name="${prefix}leftStraight_link_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+    <transmission name="${prefix}rightStraight_link_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${prefix}rightStraight_link">
+        <hardwareInterface>${hw_interface}</hardwareInterface>
+      </joint>
+      <actuator name="${prefix}rightStraight_link_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+    <transmission name="${prefix}right_finger_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${prefix}right_finger">
+        <hardwareInterface>${hw_interface}</hardwareInterface>
+      </joint>
+      <actuator name="${prefix}right_finger_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+    <transmission name="${prefix}left_finger_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${prefix}left_finger">
+        <hardwareInterface>${hw_interface}</hardwareInterface>
+      </joint>
+      <actuator name="${prefix}left_finger_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
 
   </xacro:macro>
 
