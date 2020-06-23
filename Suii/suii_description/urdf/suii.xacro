@@ -3,7 +3,7 @@
 
   <xacro:include filename="$(find suii_description)/urdf/suii_transmission.xacro" />
   <xacro:include filename="$(find suii_description)/urdf/suii_gazebo.xacro" />
-  
+
   <xacro:macro name="cylinder_inertial" params="radius length mass *origin">
     <inertial>
       <mass value="${mass}" />
@@ -36,7 +36,7 @@
     <xacro:property name="forearm_mass" value="1.26" />
     <xacro:property name="wrist_1_mass" value="0.8" />
     <xacro:property name="wrist_2_mass" value="0.8" />
-    <xacro:property name="wrist_3_mass" value="0.35"/> 
+    <xacro:property name="wrist_3_mass" value="0.35"/>
     <xacro:property name="frame_mass" value="20.5"/>
     <xacro:property name="wheel_mass" value="0.37904"/>
 
@@ -49,7 +49,7 @@
 
     <!-- Kinematic model -->
     <!-- Properties from urcontrol.conf -->
-    <xacro:property name="d1" value="0.1519" /> 
+    <xacro:property name="d1" value="0.1519" />
     <xacro:property name="a2" value="-0.24365" />
     <xacro:property name="a3" value="-0.21325" />
     <xacro:property name="d4" value="0.11235" />
@@ -97,7 +97,7 @@
       <timeout>5</timeout>
       <powerStateTopic>power_state</powerStateTopic>
       <powerStateRate>10.0</powerStateRate>
-      <fullChargeCapacity>87.78</fullChargeCapacity>     
+      <fullChargeCapacity>87.78</fullChargeCapacity>
       <dischargeRate>-474</dischargeRate>
       <chargeRate>525</chargeRate>
       <dischargeVoltage>15.52</dischargeVoltage>
@@ -122,7 +122,7 @@
       </collision>
       <inertial>
         <mass value= "${frame_mass}"/>
-        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/> 
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/>
         <origin xyz="0.15 -0.000252178578867549 0.0919059339213158"  rpy="0 0 0" />
       </inertial>
     </link>
@@ -149,7 +149,7 @@
       </collision>
       <inertial>
         <mass value= "${bottom_mass}"/>
-        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/> 
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/>
         <origin xyz="0.0 0.0 0.0"  rpy="0 0 0" />
       </inertial>
     </link>
@@ -177,7 +177,7 @@
       </collision>
       <inertial>
         <mass value= "${wheel_mass}"/>
-        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/> 
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/>
         <origin xyz="6.3835E-11 -1.4771E-10 -0.030043"  rpy="0 0 0" />
       </inertial>
     </link>
@@ -205,7 +205,7 @@
       </collision>
       <inertial>
         <mass value= "${wheel_mass}"/>
-        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/> 
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/>
         <origin xyz="6.3835E-11 -1.4771E-10 -0.030043"  rpy="0 0 0" />
       </inertial>
     </link>
@@ -233,7 +233,7 @@
       </collision>
       <inertial>
         <mass value= "${wheel_mass}"/>
-        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/> 
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/>
         <origin xyz="6.3835E-11 -1.4771E-10 -0.030043"  rpy="0 0 0" />
       </inertial>
     </link>
@@ -261,7 +261,7 @@
       </collision>
       <inertial>
         <mass value= "${wheel_mass}"/>
-        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/> 
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/>
         <origin xyz="6.3835E-11 -1.4771E-10 -0.030043"  rpy="0 0 0" />
       </inertial>
     </link>
@@ -347,7 +347,7 @@
     <joint name="${prefix}shoulder_lift_joint" type="revolute">
       <parent link="${prefix}shoulder_link" />
       <child link = "${prefix}upper_arm_link" />
-      <origin xyz="0.0 ${shoulder_offset} 0.0" rpy="0.0 0.0 0.0" /> 
+      <origin xyz="0.0 ${shoulder_offset} 0.0" rpy="0.0 0.0 0.0" />
       <axis xyz="0 1 0" />
       <xacro:unless value="${joint_limited}">
         <limit lower="${-2.0 * pi}" upper="${2.0 * pi}" effort="330.0" velocity="2.16"/>
@@ -562,7 +562,7 @@
       </collision>
       <inertial>
         <mass value= "${frame_mass}"/>
-        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/> 
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/>
         <origin xyz="0 0 0"  rpy="0 0 0" />
       </inertial>
     </link>
@@ -571,7 +571,7 @@
       <parent link="${prefix}gripper_base" />
       <child link = "${prefix}rightTilted_link" />
       <origin xyz="-0.04625 0.0035 -0.041" rpy="0 0 3.1416" />
-      <axis xyz="0 1 0" /> 
+      <axis xyz="0 1 0" />
       <xacro:unless value="${joint_limited}">
         <limit lower="${-2.0 * pi}" upper="${2.0 * pi}" effort="54.0" velocity="3.2"/>
         <xacro:if value="${safety_limits}">
@@ -584,8 +584,8 @@
           <safety_controller soft_lower_limit="${wrist_3_lower_limit + safety_pos_margin}" soft_upper_limit="${wrist_3_upper_limit - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
         </xacro:if>
       </xacro:if>
-      <dynamics damping="0.0" friction="0.0"/>  
-    </joint> 
+      <dynamics damping="0.0" friction="0.0"/>
+    </joint>
 
     <link name="${prefix}rightTilted_link">
       <visual>
@@ -603,10 +603,10 @@
       </collision>
       <inertial>
         <mass value= "${frame_mass}"/>
-        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/> 
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/>
         <origin xyz="0 0 0"  rpy="0 0 0" />
       </inertial>
-    </link> 
+    </link>
 
     <joint name="${prefix}rightStraight_link" type="continuous">
       <parent link="${prefix}gripper_base" />
@@ -644,7 +644,7 @@
       </collision>
       <inertial>
         <mass value= "${frame_mass}"/>
-        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/> 
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/>
         <origin xyz="0 0 0"  rpy="0 0 0" />
       </inertial>
     </link> -->
@@ -653,13 +653,13 @@
  <!-- <joint name="${prefix}fingerRightLeft_link" type="continuous">
        <parent link="${prefix}rightStraight_link" />
       <child link = "${prefix}fingerRightLeft_link" />
-      <origin xyz="0.0838 0 -0.0102" rpy="0 0.2617 0"/> 
-       <axis xyz="0 1 0" /> 
+      <origin xyz="0.0838 0 -0.0102" rpy="0 0.2617 0"/>
+       <axis xyz="0 1 0" />
       <parent link="${prefix}rightTilted_link" />
       <child link = "${prefix}fingerRightLeft_link" />
-      <origin xyz="0.0579 0 -0.0302" /> 
+      <origin xyz="0.0579 0 -0.0302" />
       <axis xyz="0 1 0" /> -->
-      
+
       <!-- <xacro:unless value="${joint_limited}">
         <limit lower="${-2.0 * pi}" upper="${2.0 * pi}" effort="54.0" velocity="3.2"/>
         <xacro:if value="${safety_limits}">
@@ -694,7 +694,7 @@
       </xacro:if>
       <dynamics damping="0.0" friction="0.0"/>  -->
     <!-- </joint>  -->
-    
+
     <!-- <link name="${prefix}fingerRightLeft_link">
       <visual>
         <geometry>
@@ -711,7 +711,7 @@
       </collision>
       <inertial>
         <mass value= "${frame_mass}"/>
-        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/> 
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/>
         <origin xyz="0 0 0"  rpy="0 0 0" />
       </inertial>
     </link> -->
@@ -734,7 +734,7 @@
           <safety_controller soft_lower_limit="${wrist_3_lower_limit + safety_pos_margin}" soft_upper_limit="${wrist_3_upper_limit - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
         </xacro:if>
       </xacro:if>
-      <dynamics damping="0.0" friction="0.0"/> 
+      <dynamics damping="0.0" friction="0.0"/>
     </joint>
 
     <link name="${prefix}leftStraight_link">
@@ -775,7 +775,7 @@
           <safety_controller soft_lower_limit="${wrist_3_lower_limit + safety_pos_margin}" soft_upper_limit="${wrist_3_upper_limit - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
         </xacro:if>
       </xacro:if>
-      <dynamics damping="0.0" friction="0.0"/> 
+      <dynamics damping="0.0" friction="0.0"/>
     </joint>
 
     <link name="${prefix}leftTilted_link">
@@ -821,7 +821,7 @@
           <safety_controller soft_lower_limit="${wrist_3_lower_limit + safety_pos_margin}" soft_upper_limit="${wrist_3_upper_limit - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
         </xacro:if>
       </xacro:if>
-      <dynamics damping="0.0" friction="0.0"/> 
+      <dynamics damping="0.0" friction="0.0"/>
     </joint>
 
     <link name="${prefix}fingerLeftLeft_link">
@@ -840,7 +840,7 @@
       </collision>
       <inertial>
         <mass value= "${frame_mass}"/>
-        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/> 
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/>
         <origin xyz="0 0 0"  rpy="0 0 0" />
       </inertial>
     </link>  -->
@@ -854,7 +854,7 @@
       </collision>
       <inertial>
         <mass value= "${frame_mass}"/>
-        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/> 
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0" iyz="0" izz="0"/>
         <origin xyz="0 0 0"  rpy="0 0 0" />
       </inertial>
     </link>
@@ -929,7 +929,63 @@
       <origin xyz="-0.251153588295 -0.17189989984 0.16" rpy="0 0 ${pi/4 + pi}"/>
       <parent link="${prefix}base_link"/>
       <child link="hokuyo_link_front"/>
-    </joint> 
+    </joint>
+
+    <!-- Camera -->
+    <joint name="${prefix}camera_joint" type="fixed">
+      <axis xyz="0 1 0" />
+      <origin xyz="0.0 0.1 0.045" rpy="0 0 ${pi/2}"/>
+      <parent link="${prefix}gripper_base"/>
+      <child link="${prefix}camera_link"/>
+    </joint>
+
+    <link name="${prefix}camera_link">
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+           <box size="0.010 0.121 0.018"/>
+        </geometry>
+      </collision>
+      <visual>
+        <geometry>
+  	       <box size="0.010 0.121 0.018"/>
+        </geometry>
+        <material name="red">
+          <color rgba="0.8 0.0 0.0 1.0"/>
+        </material>
+      </visual>
+      <inertial>
+        <mass value="1e-5" />
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+      </inertial>
+    </link>
+
+    <!-- generate an optical frame http://www.ros.org/reps/rep-0103.html#suffix-frames
+        so that ros and opencv can operate on the camera frame correctly -->
+    <joint name="${prefix}camera_optical_joint_2D" type="fixed">
+      <!-- these values have to be these values otherwise the gazebo camera image
+          won't be aligned properly with the frame it is supposedly originating from -->
+      <axis xyz="0 1 0" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <parent link="${prefix}camera_link"/>
+      <child link="${prefix}camera_link_optical_2D"/>
+    </joint>
+
+    <joint name="${prefix}camera_optical_joint_3D" type="fixed">
+      <!-- these values have to be these values otherwise the gazebo camera image
+          won't be aligned properly with the frame it is supposedly originating from -->
+      <axis xyz="0 1 0" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <parent link="${prefix}camera_link"/>
+      <child link="${prefix}camera_link_optical_3D"/>
+    </joint>
+
+    <link name="${prefix}camera_link_optical_2D">
+    </link>
+
+    <link name="${prefix}camera_link_optical_3D">
+    </link>
 
     <xacro:suii_transmission prefix="${prefix}" hw_interface="${transmission_hw_interface}" />
     <xacro:suii_gazebo prefix="${prefix}" />
