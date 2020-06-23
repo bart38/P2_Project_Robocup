@@ -27,25 +27,16 @@
   <!-- load other controllers -->
   <node name="ros_control_controller_manager" pkg="controller_manager" type="controller_manager" respawn="false" output="screen" args="load joint_group_position_controller" />
 <!--field launch-->
-<<<<<<< HEAD
   <arg name="model1" default="$(find suii_description)/Field/table/urdf/table.urdf"/>
   <arg name="model2" default="$(find suii_description)/Field/rack_bin/urdf/rack_bin_red.urdf"/>
   <arg name="model3" default="$(find suii_description)/Field/rack_bin/urdf/rack_bin_blue.urdf"/>
   <arg name="model4" default="$(find suii_description)/Field/plateau/urdf/plateau_1.urdf"/>
-=======
-  <!-- <arg name="model" default="$(find suii_description)/Field/table/urdf/table.urdf"/>
-  <arg name="model2" default="$(find suii_description)/Field/rack_bin/urdf/rack_bin_red.urdf"/>
-  <arg name="model3" default="$(find suii_description)/Field/rack_bin/urdf/rack_bin_blue.urdf"/>
->>>>>>> b98e0fed9dc66f46730bb0bcc6b758acf4c2f692
 
 
   <param name="table" textfile="$(find suii_description)/Field/table/urdf/table.urdf" />
   <param name="rack_bin_red" textfile="$(find suii_description)/Field/rack_bin/urdf/rack_bin_red.urdf" />
   <param name="rack_bin_blue" textfile="$(find suii_description)/Field/rack_bin/urdf/rack_bin_blue.urdf" />
-<<<<<<< HEAD
   <param name="plateau" textfile="$(find suii_description)/Field/plateau/urdf/plateau_1.urdf" />
-=======
->>>>>>> b98e0fed9dc66f46730bb0bcc6b758acf4c2f692
 
     <node name="urdf_spawner" 
         pkg="gazebo_ros" 
@@ -54,35 +45,23 @@
         output="screen" 
         args="-x 4.5 -y 0.5 -urdf -model simple_model -param table"/>
 
-<<<<<<< HEAD
-=======
-
->>>>>>> b98e0fed9dc66f46730bb0bcc6b758acf4c2f692
     <node name="urdf_spawner_2" 
         pkg="gazebo_ros" 
         type="spawn_model" 
         respawn="false" 
         output="screen" 
-<<<<<<< HEAD
         args="-x 4.7 -y 4.55 -z 0.25 -Y 4.71 -urdf -model rack_bin_red -param rack_bin_red"/> 
-=======
-        args="-x 0.25 -y 1.65 -Y 1.57 -urdf -model simple_model2 -param rack_bin_red"/> 
->>>>>>> b98e0fed9dc66f46730bb0bcc6b758acf4c2f692
 
     <node name="urdf_spawner_3" 
         pkg="gazebo_ros" 
         type="spawn_model" 
         respawn="false" 
         output="screen" 
-<<<<<<< HEAD
         args="-x 4.7 -y 4.35 -z 0.25 -Y 4.71 -urdf -model rack_bin_blue -param rack_bin_blue"/> 
 
 
 
 
-=======
-        args="-x 0.25 -y 1.95 -Y 1.57 -urdf -model simple_model3 -param rack_bin_blue"/>  -->
->>>>>>> b98e0fed9dc66f46730bb0bcc6b758acf4c2f692
 
   <!-- load the controllers -->
   <rosparam file="$(find suii_description)/Field/table/config/config.yaml" command="load"/>
