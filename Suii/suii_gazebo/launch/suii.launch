@@ -56,15 +56,11 @@
         type="spawn_model" 
         respawn="false" 
         output="screen" 
-<<<<<<< HEAD
-        args="-x 0.25 -y 1.95 -Y 1.57 -urdf -model simple_model3 -param rack_bin_blue"/>  
-=======
         args="-x 4.7 -y 4.35 -z 0.25 -Y 4.71 -urdf -model rack_bin_blue -param rack_bin_blue"/> 
 
 
 
 
->>>>>>> 24087be0f7b666b0de233d62d2ee69d41c118a22
 
   <!-- load the controllers -->
   <rosparam file="$(find suii_description)/Field/table/config/config.yaml" command="load"/>
