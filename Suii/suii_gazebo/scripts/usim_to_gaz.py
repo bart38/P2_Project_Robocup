@@ -47,6 +47,9 @@ class JointTrajectoryActionClient(object):
 		goal.trajectory = trajectory
 		goal.goal_time_tolerance = rospy.Duration(0.0)
 		self.client.send_goal(goal)
+		sucess=client.wait_for_result()
+		while not(sucess):
+			print(sucess)
 tutorial=JointTrajectoryActionClient()
 while True:
 	tutorial.goal()

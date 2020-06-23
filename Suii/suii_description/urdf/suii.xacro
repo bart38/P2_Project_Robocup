@@ -320,9 +320,9 @@
       <origin xyz="0.0 0.0 ${shoulder_height}" rpy="0.0 0.0 0.0" />
       <axis xyz="0 0 1" />
       <xacro:unless value="${joint_limited}">
-        <limit lower="${-2.0 * pi}" upper="${2.0 * pi}" effort="330.0" velocity="2.16"/>
+        <limit lower="${-3.0 * pi}" upper="${1.0 * pi}" effort="330.0" velocity="2.16"/>
         <xacro:if value="${safety_limits}">
-          <safety_controller soft_lower_limit="${-2.0 * pi + safety_pos_margin}" soft_upper_limit="${2.0 * pi - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
+          <safety_controller soft_lower_limit="${-3.0 * pi + safety_pos_margin}" soft_upper_limit="${1.0 * pi - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
         </xacro:if>
       </xacro:unless>
       <xacro:if value="${joint_limited}">
@@ -359,9 +359,9 @@
       <origin xyz="0.0 ${shoulder_offset} 0.0" rpy="0.0 0.0 0.0" /> 
       <axis xyz="0 1 0" />
       <xacro:unless value="${joint_limited}">
-        <limit lower="${-2.0 * pi}" upper="${2.0 * pi}" effort="330.0" velocity="2.16"/>
+        <limit lower="${-2.5 * pi}" upper="${1.5 * pi}" effort="330.0" velocity="2.16"/>
         <xacro:if value="${safety_limits}">
-          <safety_controller soft_lower_limit="${-2.0 * pi + safety_pos_margin}" soft_upper_limit="${2.0 * pi - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
+          <safety_controller soft_lower_limit="${-2.5 * pi + safety_pos_margin}" soft_upper_limit="${1.5 * pi - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
         </xacro:if>
       </xacro:unless>
       <xacro:if value="${joint_limited}">
