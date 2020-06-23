@@ -42,9 +42,9 @@
     <xacro:property name="wheel_mass" value="0.37904"/>
 
     <xacro:property name="gripper_base_mass" value="0.500"/>
-    <xacro:property name="Tilted_link_mass" value="0.035"/>
-    <xacro:property name="straight_link_mass" value="0.042"/>
-    <xacro:property name="finger_mass" value="0.035"/>
+    <xacro:property name="Tilted_link" value="0.035"/>
+    <!-- <xacro:property name="" value="0.500"/>
+    <xacro:property name="" value="0.500"/> -->
 
 
     
@@ -594,18 +594,8 @@
       <child link = "${prefix}leftTilted_link" />
       <origin xyz="0.04625 0.0035 -0.041" rpy="${pi} ${pi} 0" />
       <axis xyz="0 1 0" /> 
-      <xacro:unless value="${joint_limited}">
-        <limit lower="${-2.0 * pi}" upper="${2.0 * pi}" effort="54.0" velocity="3.2"/>
-        <xacro:if value="${safety_limits}">
-          <safety_controller soft_lower_limit="${-2.0 * pi + safety_pos_margin}" soft_upper_limit="${2.0 * pi - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
-        </xacro:if>
-      </xacro:unless>
-      <xacro:if value="${joint_limited}">
-        <limit lower="${wrist_3_lower_limit}" upper="${wrist_3_upper_limit}" effort="54.0" velocity="3.2"/>
-        <xacro:if value="${safety_limits}">
-          <safety_controller soft_lower_limit="${wrist_3_lower_limit + safety_pos_margin}" soft_upper_limit="${wrist_3_upper_limit - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
-        </xacro:if>
-      </xacro:if>
+      <limit lower="${-1.6}" upper="${0}" effort="54.0" velocity="3.2"/>
+       
       <dynamics damping="0.0" friction="0.0"/>  
     </joint> 
 
@@ -635,18 +625,7 @@
       <child link = "${prefix}rightTilted_link" />
       <origin xyz="-0.04625 0.0035 -0.041" rpy="${pi} ${pi} 0" />
       <axis xyz="0 1 0" /> 
-      <xacro:unless value="${joint_limited}">
-        <limit lower="${-2.0 * pi}" upper="${2.0 * pi}" effort="54.0" velocity="3.2"/>
-        <xacro:if value="${safety_limits}">
-          <safety_controller soft_lower_limit="${-2.0 * pi + safety_pos_margin}" soft_upper_limit="${2.0 * pi - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
-        </xacro:if>
-      </xacro:unless>
-      <xacro:if value="${joint_limited}">
-        <limit lower="${wrist_3_lower_limit}" upper="${wrist_3_upper_limit}" effort="54.0" velocity="3.2"/>
-        <xacro:if value="${safety_limits}">
-          <safety_controller soft_lower_limit="${wrist_3_lower_limit + safety_pos_margin}" soft_upper_limit="${wrist_3_upper_limit - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
-        </xacro:if>
-      </xacro:if>
+      <limit lower="${0}" upper="${1.6}" effort="54.0" velocity="3.2"/>
       <dynamics damping="0.0" friction="0.0"/>  
     </joint> 
 
@@ -676,18 +655,7 @@
       <child link = "${prefix}rightStraight_link" />
       <origin xyz="-0.02125 0.0035 -0.061" rpy="${pi} ${pi} 0" />
       <axis xyz="0 1 0" /> 
-      <xacro:unless value="${joint_limited}">
-        <limit lower="${-2.0 * pi}" upper="${2.0 * pi}" effort="54.0" velocity="3.2"/>
-        <xacro:if value="${safety_limits}">
-          <safety_controller soft_lower_limit="${-2.0 * pi + safety_pos_margin}" soft_upper_limit="${2.0 * pi - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
-        </xacro:if>
-      </xacro:unless>
-      <xacro:if value="${joint_limited}">
-        <limit lower="${wrist_3_lower_limit}" upper="${wrist_3_upper_limit}" effort="54.0" velocity="3.2"/>
-        <xacro:if value="${safety_limits}">
-          <safety_controller soft_lower_limit="${wrist_3_lower_limit + safety_pos_margin}" soft_upper_limit="${wrist_3_upper_limit - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
-        </xacro:if>
-      </xacro:if>
+      <limit lower="${0}" upper="${1.6}" effort="54.0" velocity="3.2"/>
       <dynamics damping="0.0" friction="0.0"/>  
     </joint> 
 
@@ -712,23 +680,12 @@
       </inertial>
     </link>  
 
-    <joint name="${prefix}lefStraight_link" type="revolute">
+    <joint name="${prefix}leftStraight_link" type="revolute">
       <parent link="${prefix}gripper_base" />
-      <child link = "${prefix}lefStraight_link" />
+      <child link = "${prefix}leftStraight_link" />
       <origin xyz="0.02125 0.0035 -0.061" rpy="${pi} ${pi} 0" />
       <axis xyz="0 1 0" /> 
-      <xacro:unless value="${joint_limited}">
-        <limit lower="${-2.0 * pi}" upper="${2.0 * pi}" effort="54.0" velocity="3.2"/>
-        <xacro:if value="${safety_limits}">
-          <safety_controller soft_lower_limit="${-2.0 * pi + safety_pos_margin}" soft_upper_limit="${2.0 * pi - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
-        </xacro:if>
-      </xacro:unless>
-      <xacro:if value="${joint_limited}">
-        <limit lower="${wrist_3_lower_limit}" upper="${wrist_3_upper_limit}" effort="54.0" velocity="3.2"/>
-        <xacro:if value="${safety_limits}">
-          <safety_controller soft_lower_limit="${wrist_3_lower_limit + safety_pos_margin}" soft_upper_limit="${wrist_3_upper_limit - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
-        </xacro:if>
-      </xacro:if>
+      <limit lower="${-1.6}" upper="${0}" effort="54.0" velocity="3.2"/>
       <dynamics damping="0.0" friction="0.0"/>  
     </joint> 
 
@@ -756,20 +713,9 @@
     <joint name="${prefix}right_finger" type="revolute">
       <parent link="${prefix}rightTilted_link" />
       <child link = "${prefix}right_finger" />
-      <origin xyz="0.07358 0.01 -0.01452" rpy="${pi} ${pi} 0" />
+      <origin xyz="0.07358 0.01 -0.01452" rpy="${pi} ${pi} 0" /> 
       <axis xyz="0 1 0" /> 
-      <xacro:unless value="${joint_limited}">
-        <limit lower="${-2.0 * pi}" upper="${2.0 * pi}" effort="54.0" velocity="3.2"/>
-        <xacro:if value="${safety_limits}">
-          <safety_controller soft_lower_limit="${-2.0 * pi + safety_pos_margin}" soft_upper_limit="${2.0 * pi - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
-        </xacro:if>
-      </xacro:unless>
-      <xacro:if value="${joint_limited}">
-        <limit lower="${wrist_3_lower_limit}" upper="${wrist_3_upper_limit}" effort="54.0" velocity="3.2"/>
-        <xacro:if value="${safety_limits}">
-          <safety_controller soft_lower_limit="${wrist_3_lower_limit + safety_pos_margin}" soft_upper_limit="${wrist_3_upper_limit - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
-        </xacro:if>
-      </xacro:if>
+      <limit lower="${0}" upper="${1.6}" effort="54.0" velocity="3.2"/>
       <dynamics damping="0.0" friction="0.0"/>  
     </joint> 
 
@@ -797,20 +743,9 @@
     <joint name="${prefix}left_finger" type="revolute">
       <parent link="${prefix}leftTilted_link" />
       <child link = "${prefix}left_finger" />
-      <origin xyz="-0.07358 -0.01 -0.01452" rpy="${pi} ${pi} ${pi}" />
+      <origin xyz="-0.07358 -0.01 -0.01452" rpy="${pi} ${pi} ${pi}" /> 
       <axis xyz="0 1 0" /> 
-      <xacro:unless value="${joint_limited}">
-        <limit lower="${-2.0 * pi}" upper="${2.0 * pi}" effort="54.0" velocity="3.2"/>
-        <xacro:if value="${safety_limits}">
-          <safety_controller soft_lower_limit="${-2.0 * pi + safety_pos_margin}" soft_upper_limit="${2.0 * pi - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
-        </xacro:if>
-      </xacro:unless>
-      <xacro:if value="${joint_limited}">
-        <limit lower="${wrist_3_lower_limit}" upper="${wrist_3_upper_limit}" effort="54.0" velocity="3.2"/>
-        <xacro:if value="${safety_limits}">
-          <safety_controller soft_lower_limit="${wrist_3_lower_limit + safety_pos_margin}" soft_upper_limit="${wrist_3_upper_limit - safety_pos_margin}" k_position="${safety_k_position}" k_velocity="0.0"/>
-        </xacro:if>
-      </xacro:if>
+      <limit lower="${0}" upper="${1.6}" effort="54.0" velocity="3.2"/>
       <dynamics damping="0.0" friction="0.0"/>  
     </joint> 
 
@@ -835,7 +770,37 @@
       </inertial>
     </link>    
 
+    <gazebo>
+ 	 <plugin name="mimic" filename="libroboticsgroup_gazebo_mimic_joint_plugin.so">
+	    <joint>${prefix}leftTilted_link</joint>
+	    <mimicJoint>${prefix}leftStraight_link</mimicJoint> 
+            <multiplier>1</multiplier>
+	 </plugin>
+    </gazebo>
 
+    <gazebo>
+ 	 <plugin name="mimic2" filename="libroboticsgroup_gazebo_mimic_joint_plugin.so">
+	    <joint>${prefix}rightTilted_link</joint>
+	    <mimicJoint>${prefix}rightStraight_link</mimicJoint>
+            <multiplier>1</multiplier>
+	 </plugin>
+    </gazebo>
+
+    <gazebo>
+ 	 <plugin name="mimic3" filename="libroboticsgroup_gazebo_mimic_joint_plugin.so">
+	    <joint>${prefix}leftTilted_link</joint>
+	    <mimicJoint>${prefix}left_finger</mimicJoint>
+            <multiplier>-1</multiplier>
+	 </plugin>
+    </gazebo>
+    
+    <gazebo>
+ 	 <plugin name="mimic4" filename="libroboticsgroup_gazebo_mimic_joint_plugin.so">
+	    <joint>${prefix}rightTilted_link</joint>
+	    <mimicJoint>${prefix}right_finger</mimicJoint>
+            <multiplier>1</multiplier>
+	 </plugin>
+    </gazebo>
 
 
 
