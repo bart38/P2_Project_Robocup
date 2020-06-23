@@ -70,6 +70,7 @@
         </surface>
       </collision>
     </gazebo>
+    
     <gazebo reference="${prefix}bottum_link">
       <selfCollide>true</selfCollide>
     </gazebo>
