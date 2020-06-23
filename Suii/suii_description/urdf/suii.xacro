@@ -550,8 +550,8 @@
 
     <joint name="${prefix}wrist_3_link" type="revolute">
       <parent link="${prefix}wrist_3_link" />
-      <child link = "${prefix}gripper_base" />1.4771E-10
-      <origin xyz="0 0.08 0" rpy="0 1.57 -1.57" />
+      <child link = "${prefix}gripper_base"/>
+      <origin xyz="0 0.085 0" rpy="0 1.57 -1.57" />
       <axis xyz="0 1 0" />
       <xacro:unless value="${joint_limited}">
         <limit lower="${-2.0 * pi}" upper="${2.0 * pi}" effort="54.0" velocity="3.2"/>
@@ -584,7 +584,8 @@
       </collision>
       <inertial>
         <mass value= "${gripper_base_mass}"/>
-        <inertia ixx="3.1166E-10" ixy="-4.678E-12" ixz="1.861E-11" iyy="8.724E-10" iyz="5.6254E-11" izz="6.5089E-10"/> 
+        <!-- <inertia ixx="3.1166E-10" ixy="-4.678E-12" ixz="1.861E-11" iyy="8.724E-10" iyz="5.6254E-11" izz="6.5089E-10"/>  -->
+        <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/> 
         <origin xyz="0 0 0"  rpy="0 0 0" />
       </inertial>
     </link>
