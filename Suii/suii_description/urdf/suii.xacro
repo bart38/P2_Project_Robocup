@@ -79,7 +79,7 @@
 
     <!-- sensor properties-->
     <xacro:property name="sonar_link" value="-0.05" /> <!-- Size of square 'sonar' box -->
-    <xacro:property name="laser_link" value="-0.05" /> <!-- Size of square 'sonar' box -->
+    <xacro:property name="laser_link" value="-0.001" /> <!-- Size of square 'sonar' box -->
     <xacro:property name="height" value="0.3" /> <!-- height sensors-->
     <xacro:property name="axel_offset" value="0.05" /> <!-- offset placement -->
 
@@ -832,7 +832,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <box size="0.1 0.1 0.1"/>
+          <box size="0.01 0.01 0.01"/>
         </geometry>
       </collision>
 
@@ -864,7 +864,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <box size="0.1 0.1 0.1"/>
+          <box size="0.01 0.01 0.01"/>
         </geometry>
       </collision>
 
