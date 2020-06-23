@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot name="simple_example">
+<robot name="simple_exaple">
 
   <!--Link #1-->
   <link name="base_link">
@@ -17,6 +17,14 @@
         <cylinder radius="0.05" length="0.24" />
       </geometry>
     </visual>
+    <ode>
+      <mu>100</mu>
+      <mu2>100</mu2>
+      <fdir1>1 0 0</fdir1>
+      <slip1>0</slip1>
+      <slip2>0</slip2>
+    </ode>
+    <kinematic>true</kinematic>
   </link>
 
   <!--Link #2-->
@@ -36,6 +44,14 @@
         <cylinder radius="0.25" length="0.05" />
       </geometry>
     </visual>
+    <ode>
+      <mu>-dInfinity</mu>
+      <mu2>-dInfinity</mu2>
+      <fdir1>1 0 0</fdir1>
+      <slip1>0</slip1>
+      <slip2>0</slip2>
+    </ode>
+    <kinematic>true</kinematic>
   </link>
 
   <!--joint-->
@@ -50,15 +66,33 @@
 
   <!-- ROS Control plugin for Gazebo. This allows Gazebo and Ros to to be connected,
        and for ros to control the model in the gazebo visualization -->
-  <gazebo>
+  <!-- <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-	  <!--this is the namespace in the yaml file-->
+	  <this is the namespace in the yaml file>
       <robotNamespace>/simple_model</robotNamespace>
-      <!--The two lines below came from: https://answers.ros.org/question/292444/gazebo_ros_control-plugin-gazeboroscontrolplugin-missing-legacymodens-defaultrobothwsim/-->
+      <-The two lines below came from: https://answers.ros.org/question/292444/gazebo_ros_control-plugin-gazeboroscontrolplugin-missing-legacymodens-defaultrobothwsim/
       <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
       <legacyModeNS>true</legacyModeNS>
     </plugin>
+  </gazebo> -->
+
+  <gazebo>
+    <plugin name="omni_steering" filename="libgazebo_ros_planar_move.so">
+      <commandTopic>/table_cmd_vel</commandTopic>
+      <odometryTopic>/odom</odometryTopic>
+      <odometryFrame>/odom</odometryFrame>
+      <odometryRate>50.0</odometryRate>
+      <robotBaseFrame>base_link</robotBaseFrame>
+      <publishTF>false</publishTF>
+    </plugin>
   </gazebo>
+  <gazebo>
+    <plugin name="ros_control" filename="libgazebo_ros_control.so">
+    <!--robotNamespace>/</robotNamespace-->
+    <!--robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType-->
+    </plugin>
+  </gazebo>
+
 
 
   <!-- transmission is the ability to define the ros controller used to control the joint. -->
