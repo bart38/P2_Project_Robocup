@@ -590,7 +590,7 @@
       </inertial>
     </link>
 
-    <joint name="${prefix}leftTilted_link" type="fixed">
+    <joint name="${prefix}leftTilted_link" type="revolute">
       <parent link="${prefix}gripper_base" />
       <child link = "${prefix}leftTilted_link" />
       <origin xyz="0.04625 0.0035 -0.041" rpy="${pi} ${pi} 0" />
