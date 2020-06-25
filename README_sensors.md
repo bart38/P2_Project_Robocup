@@ -23,6 +23,12 @@ Camera_2D | camera      | libgazebo_ros_camera
 Camera_3D | depth       | libgazebo_ros_openni_kinect
 Sonar     | ray         | libgazebo_ros_range
 
+#### Lidar Visuals
+The Lidar rays are being shown in the simulator by defualt. If one wishes to not have these visual rays they can disable them in the suii_gazebo.xacro file. In line 103 and line 136 the following line can be changed to ```true``` or ```false```:
+```
+<visualize>true</visualize>
+```
+
 #### Lidar not working
 **!!! The Lidar needs to be able to use the graphics card. To do that you'll need to install the graphics card driver.**
 To install the correct driver run the following command:
