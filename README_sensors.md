@@ -23,6 +23,23 @@ Camera_2D | camera      | libgazebo_ros_camera
 Camera_3D | depth       | libgazebo_ros_openni_kinect
 Sonar     | ray         | libgazebo_ros_range
 
+#### Lidar not working
+**!!! The Lidar needs to be able to use the graphics card. To do that you'll need to install the graphics card driver.**
+To install the correct driver run the following command:
+```
+ubuntu-drivers devices
+```
+Look for the recommended driver to be installed. For example, I have the following driver:
+```
+vendor   : NVIDIA Corporation
+driver   : nvidia-driver-440 - distro non-free recommended
+ ```
+ To install the driver run the following command, for me it is driver-440:
+ ```
+sudo apt install nvidia-driver-440
+ ```
+When the installation is finished, reboot your computer and now it will use your GPU.
+
 ### Sensor Topics & Messages
 The sensors send their data to their specific ros topics. The rostopics that are used with the message data types are as follows:
 
