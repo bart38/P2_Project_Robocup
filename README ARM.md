@@ -6,9 +6,9 @@ Steps to follow before controlling the arm:
      4.Go to  the folder ursim-3.6.0.30.512:
      5.Execute  sudo ./install.sh ,this will install the UR simulator
      6. Run sudo apt install libxmlrpc-c++8-dev:i386
-     7. Download https://github.com/ros-industrial/universal_robot.git
-     8. Download https://github.com/ros-industrial/ur_modern_driver.git
-     9. Download https://github.com/roboticsgroup/roboticsgroup_gazebo_plugins.git
+     7. Unzip /ur_pcks/universal_robot.zip
+     8. Unzip ur_pcks/ur_modern_driver.zip
+     9. Unzip roboticsgroup_gazebo_plugins.zip
      10. Run sudo apt-get install ros-melodic-ros-control ros-melodic-ros-controllers
      11. Execute sudo apt-get install ros-melodic-moveit
 Steps to follow to control the arm:
