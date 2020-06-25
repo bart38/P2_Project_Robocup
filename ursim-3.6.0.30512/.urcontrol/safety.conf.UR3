@@ -2,27 +2,9 @@
 # NOTE: The SafetyParameters section is protected by a CRC checksum, please use the supplied tool
 
 ## SafetyParameters ##
-[SafetyIOConfiguration]
-emergencyStopInputA = 255
-emergencyStopInputB = 255
-reducedModeInputA = 255
-reducedModeInputB = 255
-safeguardStopResetInputA = 0
-safeguardStopResetInputB = 1
-threePositionEnablingInputA = 255
-threePositionEnablingInputB = 255
-operationalModeInputA = 255
-operationalModeInputB = 255
-systemEmergencyStopOutputA = 255
-systemEmergencyStopOutputB = 255
-robotMovingOutputA = 255
-robotMovingOutputB = 255
-robotNotStoppingOutputA = 255
-robotNotStoppingOutputB = 255
-reducedModeOutputA = 255
-reducedModeOutputB = 255
-notReducedModeOutputA = 255
-notReducedModeOutputB = 255
+[MiscConfiguration]
+teach_pendant = 1
+euromap67 = 0
 
 [NormalModeSafetyLimits]
 maxTcpSpeed = 1.5
@@ -66,9 +48,27 @@ plane7 = [0.0, 0.0, 0.0, 0.0]
 tcpOrientationVector = [0.0, 0.0, 1.0]
 maximumTcpOrientationDeviation = 6.2831855
 
-[MiscConfiguration]
-teach_pendant = 1
-euromap67 = 0
+[SafetyIOConfiguration]
+emergencyStopInputA = 255
+emergencyStopInputB = 255
+reducedModeInputA = 255
+reducedModeInputB = 255
+safeguardStopResetInputA = 0
+safeguardStopResetInputB = 1
+threePositionEnablingInputA = 255
+threePositionEnablingInputB = 255
+operationalModeInputA = 255
+operationalModeInputB = 255
+systemEmergencyStopOutputA = 255
+systemEmergencyStopOutputB = 255
+robotMovingOutputA = 255
+robotMovingOutputB = 255
+robotNotStoppingOutputA = 255
+robotNotStoppingOutputB = 255
+reducedModeOutputA = 255
+reducedModeOutputB = 255
+notReducedModeOutputA = 255
+notReducedModeOutputB = 255
 
 [ReducedModeTriggerPlanes]
 plane0 = [0.0, 0.0, 0.0, 0.0]

@@ -201,6 +201,7 @@ class JointTrajectoryActionClient(object):
 
 		
 tutorial=JointTrajectoryActionClient()
+"""
 tutorial.move(1,0,0)
 rospy.sleep(0.8)
 tutorial.move(0,1,0)
@@ -208,6 +209,7 @@ rospy.sleep(0.8)
 tutorial.move(0,0,1)
 rospy.sleep(0.8)
 tutorial.move(0,0,0)
+"""
 tutorial.start()
 print("started")
 rospy.sleep(0.3)
