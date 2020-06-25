@@ -1,4 +1,4 @@
 #!/bin/sh
 exec 2>&1
-cd "/home/alfredo/Downloads/ursim-3.6.0.30512/GUI/felix-cache/bundle92/data/com/ur/urcap/profinet/impl/daemon/"
-exec "/home/alfredo/Downloads/ursim-3.6.0.30512/GUI/felix-cache/bundle92/data/com/ur/urcap/profinet/impl/daemon/PN"
+cd "/home/ros/catkin_ws/src/P2_Project_Robocup/ursim-3.6.0.30512/GUI/felix-cache/bundle92/data/com/ur/urcap/profinet/impl/daemon/"
+exec "/home/ros/catkin_ws/src/P2_Project_Robocup/ursim-3.6.0.30512/GUI/felix-cache/bundle92/data/com/ur/urcap/profinet/impl/daemon/PN"
