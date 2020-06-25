@@ -1,5 +1,6 @@
 # P2_Project_Robocup
 Steps to follow before controlling the arm:
+     0. Install the ursim 3.6 simulator https://www.universal-robots.com/download/
      1.Install the correct java version: sudo apt-get install openjdk-8-jdk
      2. Check that the version is correct: java -version
      3. If not: sudo update-alternatives --set java /usr/lib/jvm/jdk1.8.0_version/bin/java
@@ -7,19 +8,14 @@ Steps to follow before controlling the arm:
      5.Execute  sudo ./install.sh ,this will install the UR simulator
      6. Run sudo apt install libxmlrpc-c++8-dev:i386
      7. Download https://github.com/ros-industrial/universal_robot.git
-     8. Download https://github.com/ros-industrial/ur_modern_driver.git
-<<<<<<< HEAD
-     9. Download https://github.com/roboticsgroup/roboticsgroup_gazebo_plugins.git
-     10. Download https://github.com/ros-controls/ros_control.git
-     11. Execute sudo apt-get install ros-melodic-moveit
-=======
-     9. Erase  ur/modern_driver/src/ur_hardware_interface.cpp and put  in its place the ur_hardware_interface.cpp you already had
-     9. Download https://github.com/roboticsgroup/roboticsgroup_gazebo_plugins.git
-     10. Download https://github.com/ros-controls/ros_control.git
-     11. If you don't have it you need to clone https://github.com/ros-simulation/gazebo_ros_pkgs.git
-     12. Execute sudo apt-get install ros-melodic-moveit
-     13. Normally when you install the ursimulaotr it deletes some parts of ROS,so go to http://wiki.ros.org/Installation/Ubuntu and follow the steps
->>>>>>> e627c0ea1aa673ceefbbf10956eba7b8f7de2f70
+     8. Unzip the changed_ur_moder_driver.zip
+     9. Download https://github.com/ros-controls/ros_control.git
+     10. Execute sudo apt-get install ros-melodic-moveit
+     11. Download https://github.com/roboticsgroup/roboticsgroup_gazebo_plugins.git
+     12. If you don't have it you need to clone https://github.com/ros-simulation/gazebo_ros_pkgs.git
+     13. Execute sudo apt-get install ros-melodic-moveit
+     14. Normally when you install the ursimulaotr it deletes some parts of ROS,so go to http://wiki.ros.org/Installation/Ubuntu and follow the steps
+
 Steps to follow to control the arm:
 	1. Go to  the folder ursim-3.6.0.30.512
 	2. Execute  sudo ./starturcontrol.sh
